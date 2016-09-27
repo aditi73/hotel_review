@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require "csv"
-begin
+# begin
 	@page=Nokogiri::HTML(open("https://www.tripadvisor.in/Hotel_Review-g297628-d2038751-Reviews-Ibis_Bengaluru_Techpark-Bengaluru_Bangalore_Karnataka",:read_timeout => 10000000000000000))
 	
 	#Hotel Info
@@ -42,12 +42,12 @@ begin
 					# else
 					# 	@review_date = "Review date not found"
 					# end
-					@cust_review = @review_page.css('div.reviewerBadge span.badgeText')[j]
-					if !@cust_review.nil?
-						@total_cust_review = @cust_review.text
-					else
-						@total_cust_review = "Customer review count not fount"
-					end
+					@total_cust_review = @review_page.css('div.reviewerBadge span.badgeText')[j].text
+					# if !@cust_review.nil?
+					# 	@total_cust_review = @cust_review.text
+					# else
+					# 	@total_cust_review = "Customer review count not fount"
+					# end
 					if i==0
 						@mem_info = @review_page.css('div.username')[j+1].text.gsub!(/[^0-9A-Za-z' '',.@]/, '')
 					else
@@ -82,8 +82,7 @@ begin
 			end
 		end
 	end
-rescue
-	p "Internet issue"
-end
-
+# rescue
+# 	p "Internet issue"
+# end
 
